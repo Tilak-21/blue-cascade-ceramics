@@ -20,14 +20,17 @@ const TileListItem = ({ tile }) => {
       <div className="flex items-center gap-4">
         {/* Tile Image */}
         <div className="flex-shrink-0">
-          <div className="w-20 h-20 bg-gradient-to-br from-stone-50 via-stone-100 to-stone-200 rounded-lg overflow-hidden">
+          <div className="w-24 h-24 sm:w-28 sm:h-28 bg-gradient-to-br from-stone-50 via-stone-100 to-stone-200 rounded-xl overflow-hidden">
             {tile.image && !imageError ? (
               <img
                 src={tile.image}
                 alt={tile.series}
-                className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                className="w-full h-full object-contain"
+                style={{ 
+                  objectPosition: 'center',
+                  filter: 'contrast(1.02) saturate(1.05)' 
+                }}
                 onError={handleImageError}
-                loading="lazy"
               />
             ) : (
               <div className="w-full h-full bg-gradient-to-br from-stone-200 to-stone-300 flex items-center justify-center">

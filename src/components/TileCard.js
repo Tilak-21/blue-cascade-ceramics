@@ -17,29 +17,36 @@ const TileCard = ({ tile }) => {
   };
 
   return (
-    <div className="tile-card bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-stone-200">
-      <div className="h-40 bg-gradient-to-br from-stone-50 via-stone-100 to-stone-200 flex items-center justify-center relative overflow-hidden">
+    <div className="tile-card bg-white rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300 overflow-hidden border border-gray-200 hover:border-stone-300">
+      {/* Simple Image Container */}
+      <div className="relative bg-gradient-to-br from-stone-50 via-stone-100 to-stone-200 overflow-hidden" style={{ aspectRatio: '4/5' }}>
         {tile.image && !imageError ? (
           <img
             src={tile.image}
             alt={tile.series}
-            className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+            className="w-full h-full object-contain"
+            style={{ 
+              objectPosition: 'center',
+              filter: 'contrast(1.02) saturate(1.05)' 
+            }}
             onError={handleImageError}
-            loading="lazy"
           />
         ) : (
-          <div className="w-24 h-24 bg-gradient-to-br from-stone-200 to-stone-300 rounded-lg shadow-sm flex items-center justify-center transform hover:scale-105 transition-transform">
-            <div className="w-16 h-16 bg-gradient-to-br from-stone-300 to-stone-400 rounded flex items-center justify-center">
-              <Grid className="w-6 h-6 text-stone-600" />
+          <div className="w-full h-full flex items-center justify-center">
+            <div className="w-20 h-20 bg-gradient-to-br from-stone-200 to-stone-300 rounded-lg shadow-sm flex items-center justify-center">
+              <div className="w-12 h-12 bg-gradient-to-br from-stone-300 to-stone-400 rounded flex items-center justify-center">
+                <Grid className="w-6 h-6 text-stone-600" />
+              </div>
             </div>
           </div>
         )}
         
-        <span className={`absolute top-3 right-3 px-2 py-1 rounded-full text-xs font-medium ${getCategoryColor(tile.category)} backdrop-blur-sm bg-opacity-90`}>
+        {/* Badges */}
+        <span className={`absolute top-3 right-3 px-2 py-1 rounded-full text-xs font-medium ${getCategoryColor(tile.category)} backdrop-blur-md bg-opacity-95 shadow-sm`}>
           {tile.category}
         </span>
         
-        <span className={`absolute top-3 left-3 px-2 py-1 rounded-full text-xs font-medium ${getPEIColor(tile.peiRating)} backdrop-blur-sm bg-opacity-90`}>
+        <span className={`absolute top-3 left-3 px-2 py-1 rounded-full text-xs font-medium ${getPEIColor(tile.peiRating)} backdrop-blur-md bg-opacity-95 shadow-sm`}>
           {tile.peiRating}
         </span>
       </div>
