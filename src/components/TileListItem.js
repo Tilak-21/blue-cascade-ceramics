@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Ruler, Package, Award, Palette, Grid } from 'lucide-react';
+import { Ruler, Package, Award, Palette, Grid, ZoomIn } from 'lucide-react';
 import { 
   formatTileSize, 
   getCategoryColor, 
@@ -8,7 +8,7 @@ import {
   formatNumber 
 } from '../utils/helpers';
 
-const TileListItem = ({ tile }) => {
+const TileListItem = ({ tile, onImageClick }) => {
   const [imageError, setImageError] = useState(false);
 
   const handleImageError = () => {
@@ -18,20 +18,40 @@ const TileListItem = ({ tile }) => {
   return (
     <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-5 hover:shadow-md transition-shadow">
       <div className="flex items-center gap-4">
-        {/* Tile Image */}
+        {/* Tile Image - Clickable */}
         <div className="flex-shrink-0">
-          <div className="w-24 h-24 sm:w-28 sm:h-28 bg-gradient-to-br from-stone-50 via-stone-100 to-stone-200 rounded-xl overflow-hidden">
+          <div 
+            className="w-24 h-24 sm:w-28 sm:h-28 bg-gradient-to-br from-stone-50 via-stone-100 to-stone-200 rounded-xl overflow-hidden cursor-pointer group relative"
+            onClick={() => onImageClick && onImageClick(tile)}
+            role="button"
+            tabIndex={0}
+            aria-label={`View larger image of ${tile.series}`}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                onImageClick && onImageClick(tile);
+              }
+            }}
+          >
             {tile.image && !imageError ? (
-              <img
-                src={tile.image}
-                alt={tile.series}
-                className="w-full h-full object-contain"
-                style={{ 
-                  objectPosition: 'center',
-                  filter: 'contrast(1.02) saturate(1.05)' 
-                }}
-                onError={handleImageError}
-              />
+              <>
+                <img
+                  src={tile.image}
+                  alt={`${tile.series} ${tile.material} tile sample`}
+                  className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-105"
+                  style={{ 
+                    objectPosition: 'center',
+                    filter: 'contrast(1.02) saturate(1.05)' 
+                  }}
+                  onError={handleImageError}
+                />
+                {/* Zoom overlay for list view */}
+                <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center">
+                  <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white bg-opacity-90 rounded-full p-2">
+                    <ZoomIn className="w-4 h-4 text-stone-800" />
+                  </div>
+                </div>
+              </>
             ) : (
               <div className="w-full h-full bg-gradient-to-br from-stone-200 to-stone-300 flex items-center justify-center">
                 <Grid className="w-6 h-6 text-stone-600" />

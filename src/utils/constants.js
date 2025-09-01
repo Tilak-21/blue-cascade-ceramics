@@ -1,10 +1,16 @@
 export const APP_CONFIG = {
-  name: 'TileCraft Premium',
-  tagline: 'Ceramic & Porcelain Collection',
-  description: 'Professional ceramic and porcelain tile showcase for US market buyers',
+  name: 'Blue Cascade Ceramics',
+  tagline: 'Premium Pacific Northwest Collection',
+  description: 'Premium ceramic and porcelain tiles serving the Pacific Northwest region',
   version: '1.0.0',
-  author: 'TileCraft Premium',
-  market: 'USA'
+  author: 'Blue Cascade Ceramics',
+  market: 'Pacific Northwest',
+  region: 'Seattle Area',
+  taglines: {
+    primary: 'Premium Pacific Northwest Collection',
+    secondary: 'Inspired by Nature, Crafted for Excellence',
+    location: 'Serving the Greater Seattle Area'
+  }
 };
 
 export const VIEW_MODES = {
@@ -68,31 +74,35 @@ export const ANIMATIONS = {
 };
 
 export const CONTACT_INFO = {
-  email: 'sales@tilecraftpremium.com',
-  phone: '+1 (555) 123-4567',
-  address: 'Premium Tile District, USA',
-  supportEmail: 'support@tilecraftpremium.com'
+  email: 'sales@bluecascadeceramics.com',
+  phone: '+1 (206) 555-TILE',
+  address: 'Greater Seattle Area, WA',
+  supportEmail: 'support@bluecascadeceramics.com',
+  showroom: 'Seattle Metro Area Showroom',
+  region: 'Serving Oregon, Washington & Idaho'
 };
 
 export const SEO_META = {
-  title: 'TileCraft Premium - Professional Ceramic & Porcelain Tiles',
-  description: 'Discover premium ceramic and porcelain tiles for commercial and residential projects. Industry-certified quality with competitive US market pricing.',
+  title: 'Blue Cascade Ceramics - Premium Pacific Northwest Ceramic & Porcelain Tiles',
+  description: 'Premium ceramic and porcelain tiles inspired by the Pacific Northwest. Serving Seattle, Portland, and the greater PNW region with quality tiles for residential and commercial projects.',
   keywords: [
     'ceramic tiles',
     'porcelain tiles',
-    'building materials',
-    'construction supplies',
-    'tile wholesale',
-    'commercial tiles',
-    'residential tiles',
-    'US market',
-    'premium tiles',
-    'tile inventory'
+    'pacific northwest tiles',
+    'seattle tiles',
+    'portland tiles',
+    'washington tiles',
+    'oregon tiles',
+    'cascade tiles',
+    'PNW building materials',
+    'pacific northwest ceramics',
+    'seattle area tiles',
+    'blue cascade ceramics'
   ]
 };
 
 export const SOCIAL_LINKS = {
-  linkedin: 'https://linkedin.com/company/tilecraft-premium',
-  instagram: 'https://instagram.com/tilecraftpremium',
-  facebook: 'https://facebook.com/tilecraftpremium'
+  linkedin: 'https://linkedin.com/company/blue-cascade-ceramics',
+  instagram: 'https://instagram.com/bluecascadeceramics',
+  facebook: 'https://facebook.com/bluecascadeceramics'
 };
