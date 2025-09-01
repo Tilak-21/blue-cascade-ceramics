@@ -29,12 +29,14 @@ export const withPerformanceOptimization = (Component, displayName) => {
 
 // Utility for creating stable callback references
 export const useStableCallback = (callback, deps) => {
-  return useCallback(callback, deps);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  return useCallback(callback, [callback, ...deps]);
 };
 
 // Utility for creating stable object references
 export const useStableObject = (object, deps) => {
-  return useMemo(() => object, deps);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  return useMemo(() => object, [object, ...deps]);
 };
 
 // Virtual scrolling utility for large lists

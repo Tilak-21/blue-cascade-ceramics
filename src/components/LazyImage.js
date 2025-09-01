@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { useInView } from 'react-intersection-observer';
 import logger from '../services/logger';
 
@@ -23,13 +23,7 @@ const LazyImage = ({
     rootMargin: '50px 0px', // Load images 50px before they come into view
   });
 
-  useEffect(() => {
-    if (inView && src && imageState === 'loading') {
-      loadImage(src);
-    }
-  }, [inView, src, imageState]);
-
-  const loadImage = (imageSrc) => {
+  const loadImage = useCallback((imageSrc) => {
     const img = new Image();
     
     img.onload = () => {
@@ -67,7 +61,13 @@ const LazyImage = ({
     };
     
     img.src = imageSrc;
-  };
+  }, [alt, fallbackSrc, onLoad, onError]);
+
+  useEffect(() => {
+    if (inView && src && imageState === 'loading') {
+      loadImage(src);
+    }
+  }, [inView, src, imageState, loadImage]);
 
   // Combine refs
   const setRefs = (element) => {

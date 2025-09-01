@@ -2,7 +2,10 @@ import '@testing-library/jest-dom';
 
 // Mock IntersectionObserver
 global.IntersectionObserver = class IntersectionObserver {
-  constructor() {}
+  // eslint-disable-next-line no-useless-constructor
+  constructor() {
+    // Required for IntersectionObserver API
+  }
   
   disconnect() {}
   

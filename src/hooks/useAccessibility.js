@@ -20,7 +20,8 @@ export const useKeyboardNavigation = (onEnter, onEscape, dependencies = []) => {
       default:
         break;
     }
-  }, dependencies);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [onEnter, onEscape, ...dependencies]);
 
   useEffect(() => {
     document.addEventListener('keydown', handleKeyDown);

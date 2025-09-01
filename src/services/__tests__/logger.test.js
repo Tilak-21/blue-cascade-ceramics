@@ -51,6 +51,7 @@ describe('Logger Service', () => {
     });
 
     test('logs debug messages when debug mode is enabled', () => {
+      // eslint-disable-next-line testing-library/no-debugging-utils
       logger.debug('Test debug message');
       expect(consoleSpy.log).toHaveBeenCalled();
     });
