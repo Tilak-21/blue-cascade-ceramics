@@ -99,7 +99,13 @@ describe('Helper Functions', () => {
   });
 
   describe('debounce', () => {
-    jest.useFakeTimers();
+    beforeEach(() => {
+      jest.useFakeTimers('legacy');
+    });
+
+    afterEach(() => {
+      jest.useRealTimers();
+    });
 
     test('delays function execution', () => {
       const mockFn = jest.fn();

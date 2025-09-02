@@ -31,8 +31,14 @@ jest.mock('../../data/tileData', () => ({
     }
   ],
   getUniqueValues: jest.fn((data, field) => {
-    const values = data.map(item => item[field]);
-    return [...new Set(values)];
+    if (!data || !Array.isArray(data)) return [];
+    const values = data.map(item => {
+      if (field === 'application' && Array.isArray(item[field])) {
+        return item[field];
+      }
+      return item[field];
+    }).flat();
+    return [...new Set(values)].filter(Boolean);
   })
 }));
 

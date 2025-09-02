@@ -14,10 +14,37 @@ jest.mock('../../config/environment', () => ({
   }
 }));
 
+// Mock localStorage
+const localStorageMock = {
+  getItem: jest.fn(),
+  setItem: jest.fn(),
+  removeItem: jest.fn(),
+  clear: jest.fn(),
+};
+
+// Mock sessionStorage
+const sessionStorageMock = {
+  getItem: jest.fn(),
+  setItem: jest.fn(),
+  removeItem: jest.fn(),
+  clear: jest.fn(),
+};
+
+Object.defineProperty(window, 'localStorage', {
+  value: localStorageMock,
+});
+
+Object.defineProperty(window, 'sessionStorage', {
+  value: sessionStorageMock,
+});
+
 describe('Logger Service', () => {
   let consoleSpy;
 
   beforeEach(() => {
+    // Reset all mocks
+    jest.clearAllMocks();
+    
     consoleSpy = {
       error: jest.spyOn(console, 'error').mockImplementation(() => {}),
       warn: jest.spyOn(console, 'warn').mockImplementation(() => {}),
@@ -25,13 +52,45 @@ describe('Logger Service', () => {
       log: jest.spyOn(console, 'log').mockImplementation(() => {}),
     };
 
-    // Clear localStorage
-    localStorage.clear();
-    sessionStorage.clear();
+    // Setup localStorage mock behavior
+    localStorageMock.getItem.mockImplementation((key) => {
+      if (key === 'app_logs') {
+        return localStorageMock._storage || '[]';
+      }
+      return null;
+    });
+    
+    localStorageMock.setItem.mockImplementation((key, value) => {
+      if (key === 'app_logs') {
+        localStorageMock._storage = value;
+      }
+    });
+    
+    localStorageMock.removeItem.mockImplementation((key) => {
+      if (key === 'app_logs') {
+        delete localStorageMock._storage;
+      }
+    });
+
+    // Setup sessionStorage mock behavior
+    sessionStorageMock.getItem.mockImplementation((key) => {
+      if (key === 'sessionId') {
+        return sessionStorageMock._sessionId || null;
+      }
+      return null;
+    });
+    
+    sessionStorageMock.setItem.mockImplementation((key, value) => {
+      if (key === 'sessionId') {
+        sessionStorageMock._sessionId = value;
+      }
+    });
   });
 
   afterEach(() => {
     Object.values(consoleSpy).forEach(spy => spy.mockRestore());
+    delete localStorageMock._storage;
+    delete sessionStorageMock._sessionId;
   });
 
   describe('basic logging', () => {
@@ -51,6 +110,9 @@ describe('Logger Service', () => {
     });
 
     test('logs debug messages when debug mode is enabled', () => {
+      // Ensure debug mode is enabled in the mock config
+      config.FEATURES.DEBUG_MODE = true;
+      
       // eslint-disable-next-line testing-library/no-debugging-utils
       logger.debug('Test debug message');
       expect(consoleSpy.log).toHaveBeenCalled();
