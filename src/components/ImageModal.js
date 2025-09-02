@@ -150,15 +150,45 @@ const ImageModal = ({
           <div className="flex flex-col lg:flex-row items-center justify-center max-w-full max-h-full gap-3 sm:gap-4 lg:gap-6 w-full">
             {/* Image */}
             <div className="relative flex-shrink-0 max-w-full">
-              <img
-                src={imageSrc}
-                alt={imageAlt}
-                className="max-w-full object-contain rounded-lg shadow-2xl"
+              {imageSrc ? (
+                <img
+                  src={imageSrc}
+                  alt={imageAlt}
+                  className="max-w-full object-contain rounded-lg shadow-2xl"
+                  style={{ 
+                    maxHeight: 'calc(100vh - 200px)', 
+                    maxWidth: 'min(90vw, 800px)' // Better max width for lightbox
+                  }}
+                  onError={(e) => {
+                    // Hide broken images gracefully
+                    e.target.style.display = 'none';
+                    // Show placeholder instead
+                    const placeholder = e.target.nextElementSibling;
+                    if (placeholder) placeholder.style.display = 'flex';
+                  }}
+                />
+              ) : null}
+              {/* Placeholder for missing/broken images */}
+              <div 
+                className="flex items-center justify-center bg-gradient-to-br from-pacific-100 to-pacific-200 rounded-lg shadow-2xl"
                 style={{ 
-                  maxHeight: 'calc(100vh - 200px)', // Mobile: smaller header
-                  maxWidth: 'min(90vw, 100%)' // Mobile: use more width
+                  maxHeight: 'calc(100vh - 200px)', 
+                  maxWidth: 'min(90vw, 800px)',
+                  minHeight: '400px',
+                  minWidth: '300px',
+                  display: imageSrc ? 'none' : 'flex'
                 }}
-              />
+              >
+                <div className="text-center text-pacific-600">
+                  <div className="w-16 h-16 mx-auto mb-4 bg-pacific-300 rounded-full flex items-center justify-center">
+                    <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-medium mb-2">Preview Coming Soon</h3>
+                  <p className="text-sm">High-quality image preview will be available shortly</p>
+                </div>
+              </div>
             </div>
             
             {/* Image Info Panel - Responsive */}

@@ -119,25 +119,21 @@ export const getTileImage = (series, material, qty) => {
     }
   }
 
-  // Default mapping based on series name
-  const defaultImage = `${seriesName}.png`;
+  // For now, return a placeholder or null since we don't have actual images
+  // This prevents 404 errors in the console
   
-  // List of available images (you can expand this as needed)
-  const availableImages = [
-    'mistrey.png', 'bassano.png', 'bianco_vena.png', 'braid.png', 'brime_stone.png',
-    'calacatta_gold.png', 'country_brick.png', 'dartha.png', 'draide_pro_marble.png',
-    'earth_stone.png', 'emery.png', 'goldquadra.png', 'intensity.png', 'inwood.png',
-    'lounge.png', 'metropol.png', 'new_travertino.png', 'notrees.png', 'numero.png',
-    'ocean_wave.png', 'opificio.png', 'pietra_piasentina.png', 'pursuit.png',
-    'ripple.png', 'sea_wood.png', 'seal_marble.png', 'senale.png', 'siox.png',
-    'skipton.png', 'stark_stone.png', 'tech_marble.png', 'trimick.png',
-    'venquartz.png', 'viga_brick.png', 'way_concrete.png'
-  ];
+  // Generate a consistent placeholder based on series name (for future use)
+  // const defaultImage = `${seriesName.toLowerCase().replace(/\s+/g, '_')}.png`;
+  
+  // Since we don't have physical images yet, we'll use a data URL placeholder
+  // or return null to let the component handle the fallback
+  
+  // You can uncomment this when you have actual images:
+  // const availableImages = ['mistrey.png', 'bassano.png', /* other images */];
+  // if (availableImages.includes(defaultImage)) {
+  //   return `/images/${defaultImage}`;
+  // }
 
-  if (availableImages.includes(defaultImage)) {
-    return `/images/${defaultImage}`;
-  }
-
-  // Fallback to a default tile image or return null
+  // Return null to trigger fallback handling in components
   return null;
 };

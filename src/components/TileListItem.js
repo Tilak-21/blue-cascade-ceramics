@@ -16,12 +16,12 @@ const TileListItem = ({ tile, onImageClick }) => {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-5 hover:shadow-md transition-shadow">
-      <div className="flex items-center gap-4">
+    <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-3 sm:p-5 hover:shadow-md transition-shadow">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
         {/* Tile Image - Clickable */}
-        <div className="flex-shrink-0">
+        <div className="flex-shrink-0 w-full sm:w-auto">
           <div 
-            className="w-24 h-24 sm:w-28 sm:h-28 bg-gradient-to-br from-stone-50 via-stone-100 to-stone-200 rounded-xl overflow-hidden cursor-pointer group relative"
+            className="w-full h-32 sm:w-24 sm:h-24 md:w-28 md:h-28 bg-gradient-to-br from-stone-50 via-stone-100 to-stone-200 rounded-xl overflow-hidden cursor-pointer group relative"
             onClick={() => onImageClick && onImageClick(tile)}
             role="button"
             tabIndex={0}
@@ -59,36 +59,36 @@ const TileListItem = ({ tile, onImageClick }) => {
             )}
           </div>
         </div>
-        <div className="flex-1">
-          <div className="flex items-center justify-between mb-3">
-            <h3 className="font-bold text-xl text-stone-900">{tile.series}</h3>
-            <div className="text-right">
-              <span className="text-2xl font-bold text-stone-800">${tile.proposedSP}</span>
+        <div className="flex-1 w-full">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-3 gap-2 sm:gap-0">
+            <h3 className="font-bold text-lg sm:text-xl text-stone-900">{tile.series}</h3>
+            <div className="text-left sm:text-right">
+              <span className="text-xl sm:text-2xl font-bold text-stone-800">${tile.proposedSP}</span>
               <span className="text-sm text-stone-500 ml-1">per m²</span>
             </div>
           </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm text-stone-600 mb-3">
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 text-xs sm:text-sm text-stone-600 mb-3">
             <div className="flex items-center">
-              <Ruler className="w-3 h-3 mr-1" />
-              {formatTileSize(tile.size)}
+              <Ruler className="w-3 h-3 mr-1 flex-shrink-0" />
+              <span className="truncate">{formatTileSize(tile.size)}</span>
             </div>
             <div className="flex items-center">
-              <Package className="w-3 h-3 mr-1" />
-              {formatNumber(tile.qty)} m²
+              <Package className="w-3 h-3 mr-1 flex-shrink-0" />
+              <span className="truncate">{formatNumber(tile.qty)} m²</span>
             </div>
             <div className="flex items-center">
-              <Award className="w-3 h-3 mr-1" />
-              {tile.peiRating}
+              <Award className="w-3 h-3 mr-1 flex-shrink-0" />
+              <span className="truncate">{tile.peiRating}</span>
             </div>
             <div className="flex items-center">
-              <Palette className="w-3 h-3 mr-1" />
-              {tile.finish}
+              <Palette className="w-3 h-3 mr-1 flex-shrink-0" />
+              <span className="truncate">{tile.finish}</span>
             </div>
           </div>
           
-          <div className="flex items-center justify-between">
-            <div className="flex flex-wrap gap-2">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-2">
+            <div className="flex flex-wrap gap-1 sm:gap-2">
               <span className={`px-2 py-1 rounded-full text-xs ${getCategoryColor(tile.category)}`}>
                 {tile.category}
               </span>
@@ -102,7 +102,7 @@ const TileListItem = ({ tile, onImageClick }) => {
               ))}
             </div>
             <button 
-              className="bg-stone-800 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-stone-900 transition-colors"
+              className="bg-stone-800 text-white px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium hover:bg-stone-900 transition-colors w-full sm:w-auto text-center"
               aria-label={`Request quote for ${tile.series}`}
             >
               Request Quote

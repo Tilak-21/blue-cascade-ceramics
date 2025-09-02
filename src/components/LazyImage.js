@@ -64,8 +64,13 @@ const LazyImage = ({
   }, [alt, fallbackSrc, onLoad, onError]);
 
   useEffect(() => {
-    if (inView && src && imageState === 'loading') {
-      loadImage(src);
+    if (inView && imageState === 'loading') {
+      if (src) {
+        loadImage(src);
+      } else {
+        // If no src provided, show error state immediately
+        setImageState('error');
+      }
     }
   }, [inView, src, imageState, loadImage]);
 

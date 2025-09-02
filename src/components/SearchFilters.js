@@ -44,11 +44,11 @@ const SearchFilters = ({
         />
       </div>
 
-      <div className="flex flex-wrap gap-4 items-center justify-between">
-        <div className="flex flex-wrap gap-3">
+      <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+        <div className="flex flex-col sm:flex-row flex-wrap gap-3 w-full sm:w-auto">
           <button
             onClick={() => setShowFilters(!showFilters)}
-            className="flex items-center px-5 py-3 bg-white border border-pacific-300 rounded-xl hover:bg-pacific-50 transition-colors shadow-sm"
+            className="flex items-center justify-center sm:justify-start px-5 py-3 bg-white border border-pacific-300 rounded-xl hover:bg-pacific-50 transition-colors shadow-sm w-full sm:w-auto"
             aria-expanded={showFilters}
             aria-controls="advanced-filters"
           >
@@ -60,7 +60,7 @@ const SearchFilters = ({
           <select
             value={selectedType}
             onChange={(e) => setSelectedType(e.target.value)}
-            className="px-4 py-3 bg-white border border-pacific-300 rounded-xl focus:ring-2 focus:ring-cascade-500 text-pacific-900 shadow-sm"
+            className="px-4 py-3 bg-white border border-pacific-300 rounded-xl focus:ring-2 focus:ring-cascade-500 text-pacific-900 shadow-sm w-full sm:w-auto text-sm sm:text-base"
             aria-label="Filter by material type"
           >
             <option value={FILTER_DEFAULTS.ALL}>All Materials</option>
@@ -71,7 +71,7 @@ const SearchFilters = ({
           <select
             value={selectedApplication}
             onChange={(e) => setSelectedApplication(e.target.value)}
-            className="px-4 py-3 bg-white border border-pacific-300 rounded-xl focus:ring-2 focus:ring-cascade-500 text-pacific-900 shadow-sm"
+            className="px-4 py-3 bg-white border border-pacific-300 rounded-xl focus:ring-2 focus:ring-cascade-500 text-pacific-900 shadow-sm w-full sm:w-auto text-sm sm:text-base"
             aria-label="Filter by application"
           >
             <option value={FILTER_DEFAULTS.ALL}>All Applications</option>

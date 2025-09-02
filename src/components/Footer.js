@@ -7,10 +7,12 @@ const Footer = () => {
     <footer className="bg-pacific-900 text-white mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-center">
-          <div className="w-16 h-16 bg-gradient-to-br from-cascade-500 to-cascade-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-cascade">
-            <div className="w-10 h-10 bg-white rounded-lg opacity-95 flex items-center justify-center">
-              <div className="w-6 h-6 bg-cascade-600 rounded"></div>
-            </div>
+          <div className="w-16 h-16 mx-auto mb-6">
+            <img 
+              src="/images/site_logo.png" 
+              alt={`${APP_CONFIG.name} Logo`}
+              className="w-full h-full object-contain"
+            />
           </div>
           
           <h3 className="text-2xl font-bold mb-4">Ready to Transform Your Space?</h3>

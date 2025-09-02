@@ -126,9 +126,9 @@ function App() {
           setShowFilters={setShowFilters}
         />
 
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-8 gap-4">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between mb-6 sm:mb-8 gap-4">
           <div>
-            <p className="text-pacific-800 font-medium text-lg">
+            <p className="text-pacific-800 font-medium text-base sm:text-lg">
               {filteredData.length} Premium Products Available
             </p>
             <p className="text-cascade-600 text-sm">
@@ -136,30 +136,30 @@ function App() {
             </p>
           </div>
           
-          <div className="flex items-center gap-4 text-sm">
+          <div className="flex flex-wrap items-center gap-3 sm:gap-4 text-xs sm:text-sm">
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-forest-500 rounded-full"></div>
+              <div className="w-3 h-3 bg-forest-500 rounded-full flex-shrink-0"></div>
               <span className="text-pacific-600">Ready to Ship</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-cascade-500 rounded-full"></div>
+              <div className="w-3 h-3 bg-cascade-500 rounded-full flex-shrink-0"></div>
               <span className="text-pacific-600">Industry Certified</span>
             </div>
             
-            <div className="flex items-center gap-2 ml-4">
+            <div className="flex items-center gap-2 ml-0 sm:ml-4">
               <button
                 onClick={() => setViewMode(VIEW_MODES.GRID)}
-                className={`p-3 rounded-xl transition-colors ${viewMode === VIEW_MODES.GRID ? 'bg-cascade-600 text-white shadow-tile' : 'bg-white text-pacific-600 border border-pacific-300 hover:bg-pacific-50'}`}
+                className={`p-2 sm:p-3 rounded-xl transition-colors ${viewMode === VIEW_MODES.GRID ? 'bg-cascade-600 text-white shadow-tile' : 'bg-white text-pacific-600 border border-pacific-300 hover:bg-pacific-50'}`}
                 aria-label="Grid view"
               >
-                <Grid className="w-5 h-5" />
+                <Grid className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
               <button
                 onClick={() => setViewMode(VIEW_MODES.LIST)}
-                className={`p-3 rounded-xl transition-colors ${viewMode === VIEW_MODES.LIST ? 'bg-cascade-600 text-white shadow-tile' : 'bg-white text-pacific-600 border border-pacific-300 hover:bg-pacific-50'}`}
+                className={`p-2 sm:p-3 rounded-xl transition-colors ${viewMode === VIEW_MODES.LIST ? 'bg-cascade-600 text-white shadow-tile' : 'bg-white text-pacific-600 border border-pacific-300 hover:bg-pacific-50'}`}
                 aria-label="List view"
               >
-                <List className="w-5 h-5" />
+                <List className="w-4 h-4 sm:w-5 sm:h-5" />
               </button>
             </div>
           </div>
