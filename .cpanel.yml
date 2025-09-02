@@ -1,17 +1,6 @@
 ---
 deployment:
   tasks:
-    # Set deployment path to your cPanel public_html directory
     - export DEPLOYPATH=/home/bluecasc/public_html/
-    
-    # Build the React application (build files are ignored in repo)
-    - npm ci --only=production
     - npm run build
-    
-    # Copy build files to the web root
     - /bin/cp -R build/* $DEPLOYPATH
-    
-    # Clean up - remove development files from web root if they exist
-    - /bin/rm -f $DEPLOYPATH/package*.json || true
-    - /bin/rm -f $DEPLOYPATH/.gitignore || true
-    - /bin/rm -f $DEPLOYPATH/README.md || true
