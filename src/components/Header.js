@@ -4,22 +4,23 @@ import { APP_CONFIG, CONTACT_INFO } from '../utils/constants';
 
 const Header = () => {
   return (
-    <header className="bg-white shadow-cascade border-b border-pacific-200 sticky top-0 z-50">
+    <header className="bg-white shadow-cascade border-b border-pacific-200 sticky top-0 z-50" role="banner">
+      <nav id="main-navigation" role="navigation" aria-label="Main navigation">
       {/* Mobile Header - Edge to Edge Logo */}
       <div className="sm:hidden">
-        <div className="flex items-center justify-between px-2 py-1">
-          {/* Left - Compact Location */}
-          <div className="flex items-center text-xs text-pacific-600 bg-pacific-50 px-2 py-1 rounded border border-pacific-100">
-            <MapPin className="w-3 h-3 mr-1 text-cascade-500 flex-shrink-0" />
+        <div className="flex items-center justify-between px-2 py-2">
+          {/* Left - Larger Location */}
+          <div className="flex items-center text-sm text-pacific-600 bg-pacific-50 px-4 py-2 rounded-lg border border-pacific-100">
+            <MapPin className="w-4 h-4 mr-2 text-cascade-500 flex-shrink-0" />
             <span className="font-medium">PNW</span>
           </div>
 
-          {/* Right - Compact Phone */}
+          {/* Right - Larger Phone */}
           <a 
             href={`tel:${CONTACT_INFO.phone}`}
-            className="flex items-center text-xs bg-cascade-500 text-white px-2 py-1 rounded hover:bg-cascade-600 transition-colors group"
+            className="flex items-center text-sm bg-cascade-500 text-white px-4 py-2 rounded-lg hover:bg-cascade-600 transition-colors shadow-sm hover:shadow-md group"
           >
-            <Phone className="w-3 h-3 mr-1 flex-shrink-0 group-hover:animate-pulse" />
+            <Phone className="w-4 h-4 mr-2 flex-shrink-0 group-hover:animate-pulse" />
             <span className="font-semibold">Call</span>
           </a>
         </div>
@@ -78,6 +79,7 @@ const Header = () => {
           </div>
         </div>
       </div>
+      </nav>
     </header>
   );
 };

@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { Grid, List, Package } from 'lucide-react';
 
 import Header from './components/Header';
+import SkipLinks from './components/SkipLinks';
 import SearchFilters from './components/SearchFilters';
 import TileCard from './components/TileCard';
 import TileListItem from './components/TileListItem';
@@ -105,9 +106,10 @@ function App() {
 
   return (
     <div className="min-h-screen bg-pacific-50">
+      <SkipLinks />
       <Header />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main id="main-content" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <SearchFilters
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
@@ -149,17 +151,17 @@ function App() {
             <div className="flex items-center gap-2 ml-0 sm:ml-4">
               <button
                 onClick={() => setViewMode(VIEW_MODES.GRID)}
-                className={`p-2 sm:p-3 rounded-xl transition-colors ${viewMode === VIEW_MODES.GRID ? 'bg-cascade-600 text-white shadow-tile' : 'bg-white text-pacific-600 border border-pacific-300 hover:bg-pacific-50'}`}
+                className={`p-3 rounded-xl transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center ${viewMode === VIEW_MODES.GRID ? 'bg-cascade-600 text-white shadow-tile' : 'bg-white text-pacific-600 border border-pacific-300 hover:bg-pacific-50'}`}
                 aria-label="Grid view"
               >
-                <Grid className="w-4 h-4 sm:w-5 sm:h-5" />
+                <Grid className="w-5 h-5" />
               </button>
               <button
                 onClick={() => setViewMode(VIEW_MODES.LIST)}
-                className={`p-2 sm:p-3 rounded-xl transition-colors ${viewMode === VIEW_MODES.LIST ? 'bg-cascade-600 text-white shadow-tile' : 'bg-white text-pacific-600 border border-pacific-300 hover:bg-pacific-50'}`}
+                className={`p-3 rounded-xl transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center ${viewMode === VIEW_MODES.LIST ? 'bg-cascade-600 text-white shadow-tile' : 'bg-white text-pacific-600 border border-pacific-300 hover:bg-pacific-50'}`}
                 aria-label="List view"
               >
-                <List className="w-4 h-4 sm:w-5 sm:h-5" />
+                <List className="w-5 h-5" />
               </button>
             </div>
           </div>
@@ -194,13 +196,13 @@ function App() {
             <p className="text-pacific-600 mb-6">Try adjusting your search or filter settings</p>
             <button
               onClick={resetFilters}
-              className="bg-cascade-600 text-white px-6 py-3 rounded-xl font-medium hover:bg-cascade-700 transition-colors shadow-tile-hover"
+              className="bg-cascade-600 text-white px-6 py-3 rounded-xl font-medium hover:bg-cascade-700 transition-colors shadow-tile-hover min-h-[44px]"
             >
               Reset All Filters
             </button>
           </div>
         )}
-      </div>
+      </main>
 
       <Footer />
 

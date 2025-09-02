@@ -9,6 +9,21 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+}
+
+/* Improve minimum font sizes for better readability */
+.text-xs {
+  font-size: 0.875rem; /* Increased from 0.75rem for better mobile readability */
+}
+
+/* Ensure adequate color contrast for accessibility */
+.text-pacific-400 {
+  color: #475569; /* Changed from pacific-400 to pacific-600 for better contrast */
+}
+
+.text-cascade-400 {
+  color: #0f6ba8; /* Changed from cascade-400 to cascade-600 for better contrast */
 }
 
 code {
@@ -33,8 +48,31 @@ code {
   background: #94a3b8;
 }
 
+/* Proper focus indicators for accessibility */
 *:focus {
+  outline: 2px solid #137DC5;
+  outline-offset: 2px;
+}
+
+/* Only remove outline when focus-visible is supported and user isn't using keyboard */
+*:focus:not(:focus-visible) {
   outline: none;
+}
+
+/* Enhanced focus visible for keyboard users */
+*:focus-visible {
+  outline: 2px solid #137DC5;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(19, 125, 197, 0.15);
+}
+
+/* Focus styles for buttons and interactive elements */
+button:focus-visible,
+a:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid #137DC5;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(19, 125, 197, 0.15);
 }
 
 .tile-card {
