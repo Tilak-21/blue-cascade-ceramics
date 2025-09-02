@@ -77,11 +77,13 @@ export const createImageSrcSet = (baseUrl, sizes = [400, 800, 1200, 1600]) => {
     .join(', ');
 };
 
-// Preload critical resources
+// Preload critical resources - DISABLED to prevent console warnings
+// This function can be enabled when you have actual critical resources to preload
+/*
 export const preloadCriticalResources = () => {
   const criticalImages = [
     '/images/logo-192.png',
-    '/images/hero-background.jpg',
+    '/images/hero-background.jpg', 
     '/images/placeholder-tile.svg'
   ];
   
@@ -98,7 +100,7 @@ export const preloadCriticalResources = () => {
     document.head.appendChild(link);
   });
 
-  // Preload fonts
+  // Preload fonts  
   criticalFonts.forEach(src => {
     const link = document.createElement('link');
     link.rel = 'preload';
@@ -114,6 +116,7 @@ export const preloadCriticalResources = () => {
     fonts: criticalFonts.length
   });
 };
+*/
 
 // Bundle splitting helpers
 export const loadComponentLazily = (importFunction) => {
@@ -203,10 +206,13 @@ export const initPerformanceMonitoring = () => {
     }, 30000); // Every 30 seconds
   }
 
-  // Preload critical resources
+  // Preload critical resources - DISABLED
+  // Enable this when you have actual critical resources to preload
+  /*
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', preloadCriticalResources);
   } else {
     preloadCriticalResources();
   }
+  */
 };

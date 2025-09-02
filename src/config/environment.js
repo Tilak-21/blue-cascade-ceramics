@@ -36,11 +36,17 @@ const config = {
     SALES_EMAIL: process.env.REACT_APP_SALES_EMAIL || 'sales@bluecascadeceramics.com',
     PHONE: process.env.REACT_APP_PHONE || '+1-555-123-4567',
   },
-};
 
-// Add helper functions separately to prevent potential issues with 'this' context during build.
-config.isDevelopment = () => config.ENVIRONMENT === 'development';
-config.isProduction = () => config.ENVIRONMENT === 'production';
-config.isTest = () => config.ENVIRONMENT === 'test';
+  // Include helper functions directly in the object to ensure they're properly bundled
+  isDevelopment: function() {
+    return this.ENVIRONMENT === 'development';
+  },
+  isProduction: function() {
+    return this.ENVIRONMENT === 'production';
+  },
+  isTest: function() {
+    return this.ENVIRONMENT === 'test';
+  },
+};
 
 export default config;

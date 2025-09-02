@@ -10,7 +10,7 @@ const SEOHead = ({
   image = '/images/og-default.jpg',
   url = window.location.href,
   type = 'website',
-  author = 'TileCraft Premium',
+  author = 'Blue Cascade Ceramics',
   publishedTime = null,
   modifiedTime = null
 }) => {
@@ -66,7 +66,7 @@ const SEOHead = ({
           "@type": "Organization",
           "name": config.APP_NAME,
           "description": description,
-          "url": config.isProduction() ? "https://tilecraftpremium.com" : canonicalUrl,
+          "url": config.isProduction() ? "https://bluecascadeceramics.com" : canonicalUrl,
           "logo": "/images/logo-192.png",
           "sameAs": [
             config.SOCIAL.LINKEDIN_URL,

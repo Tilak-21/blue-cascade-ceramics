@@ -139,9 +139,14 @@ class Logger {
   }
 
   async sendToLogService(logEntry) {
+    // Only attempt to send logs if a proper logging service URL is configured
+    const loggingServiceUrl = process.env.REACT_APP_LOGGING_SERVICE_URL;
+    if (!loggingServiceUrl || loggingServiceUrl === 'your_logging_service_url') {
+      return; // Skip sending logs if no proper endpoint is configured
+    }
+
     try {
-      // Replace with your actual logging service endpoint
-      await fetch('/api/logs', {
+      await fetch(loggingServiceUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
