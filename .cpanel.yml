@@ -2,4 +2,4 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/bluecasc/public_html/
-    - /bin/cp test.html $DEPLOYPATH
+    - /bin/cp -R build/* $DEPLOYPATH
