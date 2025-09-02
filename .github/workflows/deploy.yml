@@ -60,5 +60,4 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: tilak@bluecascadeceramics.com
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: /public_html/
-          dangerous-clean-slate: true
+          server-dir: public_html/
