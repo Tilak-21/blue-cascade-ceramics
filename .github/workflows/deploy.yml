@@ -54,11 +54,14 @@ jobs:
         with:
           name: build-files
 
+      - name: List files in workspace
+        run: ls -R
+
       - name: FTP Deploy
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ${{ secrets.FTP_SERVER }}
-          username: bluecasc
+          username: tilak@bluecascadeceramics.com
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./build/
           server-dir: /public_html/
