@@ -1,6 +1,6 @@
 // Service Worker for caching and offline functionality
 const CACHE_NAME = 'tilecraft-premium-v1.0.0';
-const STATIC_CACHE_NAME = 'tilecraft-static-v1.0.0';
+const STATIC_CACHE_NAME = 'blue-cascade-ceramics-static-v1.0.0';
 const DYNAMIC_CACHE_NAME = 'tilecraft-dynamic-v1.0.0';
 
 // Assets to cache on install

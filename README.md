@@ -1,4 +1,4 @@
-# TileCraft Premium - Ceramic & Porcelain Tile Showcase
+# Blue Cascade Ceramics - Ceramic & Porcelain Tile Showcase
 
 A professional, mobile-first React application for showcasing premium ceramic and porcelain tile inventory to US market buyers.
 

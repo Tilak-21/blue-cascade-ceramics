@@ -45,8 +45,8 @@ const SEOHead = ({
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={image} />
-      <meta name="twitter:site" content="@TileCraftPremium" />
-      <meta name="twitter:creator" content="@TileCraftPremium" />
+      <meta name="twitter:site" content="@BlueCascadeCera" />
+      <meta name="twitter:creator" content="@BlueCascadeCera" />
       
       {/* Article specific meta tags */}
       {type === 'article' && (
@@ -112,7 +112,7 @@ const SEOHead = ({
 // Specific SEO components for different pages
 export const HomeSEO = () => (
   <SEOHead 
-    title="Premium Ceramic & Porcelain Tiles - Professional Collection | TileCraft Premium"
+    title="Premium Ceramic & Porcelain Tiles - Professional Collection | Blue Cascade Ceramics"
     description="Discover professional-grade ceramic and porcelain tiles for commercial and residential projects. Industry-certified quality with comprehensive inventory and competitive US market pricing."
     keywords="ceramic tiles, porcelain tiles, professional tiles, commercial tiles, residential tiles, tile wholesale, building materials, construction supplies"
   />

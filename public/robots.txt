@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://tilecraftpremium.com/sitemap.xml
+Sitemap: https://bluecascadeceramics.com/sitemap.xml
 
 # Specific bot instructions
 User-agent: Googlebot

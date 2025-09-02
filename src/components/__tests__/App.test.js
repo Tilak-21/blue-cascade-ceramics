@@ -58,7 +58,7 @@ describe('App Component', () => {
 
   test('renders without crashing', () => {
     render(<AppWithProviders />);
-    expect(screen.getByText('TileCraft Premium')).toBeInTheDocument();
+    expect(screen.getByText('Blue Cascade Ceramics')).toBeInTheDocument();
   });
 
   test('displays correct number of products', async () => {

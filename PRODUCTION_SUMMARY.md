@@ -1,4 +1,4 @@
-# TileCraft Premium - Production-Grade Application
+# Blue Cascade Ceramics - Production-Grade Application
 
 A professional ceramic and porcelain tile showcase application built with React, optimized for production use with enterprise-grade features.
 

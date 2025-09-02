@@ -1,5 +1,5 @@
 {
-  "name": "tilecraft-premium",
+  "name": "blue-cascade-ceramics",
   "version": "1.0.0",
   "description": "Professional ceramic and porcelain tile showcase application for US market",
   "private": true,
@@ -33,8 +33,8 @@
     "analyze": "npm run build && npx serve -s build",
     "eject": "react-scripts eject",
     "security:audit": "npm audit --audit-level high",
-    "docker:build": "docker build -t tilecraft-premium .",
-    "docker:run": "docker run -p 8080:8080 tilecraft-premium"
+    "docker:build": "docker build -t blue-cascade-ceramics .",
+    "docker:run": "docker run -p 8080:8080 blue-cascade-ceramics"
   },
   "eslintConfig": {
     "extends": [
@@ -63,7 +63,7 @@
     "react",
     "tailwind"
   ],
-  "author": "TileCraft Premium",
+  "author": "Blue Cascade Ceramics",
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^24.3.0",

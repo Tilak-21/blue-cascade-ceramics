@@ -613,7 +613,7 @@ For production deployment:
 2. Deploy the 'build' folder to your hosting service
 
 Recommended folder structure after extraction:
-tilecraft-premium/
+blue-cascade-ceramics/
 ├── public/
 ├── src/
 ├── package.json
@@ -751,7 +751,7 @@ This creates an optimized production build in the `build` folder.
 ## 📁 Project Structure
 
 ```
-tilecraft-premium/
+blue-cascade-ceramics/
 ├── public/
 │   ├── index.html              # Main HTML template
 │   ├── manifest.json           # PWA manifest
@@ -913,8 +913,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 For questions or support:
 - **Email**: support@tilecraftpremium.com
-- **GitHub Issues**: [Create an issue](https://github.com/yourusername/tilecraft-premium/issues)
-- **Documentation**: [Wiki](https://github.com/yourusername/tilecraft-premium/wiki)
+- **GitHub Issues**: [Create an issue](https://github.com/yourusername/blue-cascade-ceramics/issues)
+- **Documentation**: [Wiki](https://github.com/yourusername/blue-cascade-ceramics/wiki)
 
 ## 🙏 Acknowledgments
 
@@ -1881,7 +1881,7 @@ export const APP_CONFIG = {
   tagline: 'Ceramic & Porcelain Collection',
   description: 'Professional ceramic and porcelain tile showcase for US market buyers',
   version: '1.0.0',
-  author: 'TileCraft Premium',
+  author: 'Blue Cascade Ceramics',
   market: 'USA'
 };
 

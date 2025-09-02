@@ -6,7 +6,7 @@
   
   <!-- Homepage -->
   <url>
-    <loc>https://tilecraftpremium.com/</loc>
+    <loc>https://bluecascadeceramics.com/</loc>
     <lastmod>2024-01-01T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
@@ -14,14 +14,14 @@
   
   <!-- Categories -->
   <url>
-    <loc>https://tilecraftpremium.com/ceramic-tiles</loc>
+    <loc>https://bluecascadeceramics.com/ceramic-tiles</loc>
     <lastmod>2024-01-01T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   
   <url>
-    <loc>https://tilecraftpremium.com/porcelain-tiles</loc>
+    <loc>https://bluecascadeceramics.com/porcelain-tiles</loc>
     <lastmod>2024-01-01T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
@@ -29,14 +29,14 @@
   
   <!-- Collections -->
   <url>
-    <loc>https://tilecraftpremium.com/volume-commercial</loc>
+    <loc>https://bluecascadeceramics.com/volume-commercial</loc>
     <lastmod>2024-01-01T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
-    <loc>https://tilecraftpremium.com/luxury-collection</loc>
+    <loc>https://bluecascadeceramics.com/luxury-collection</loc>
     <lastmod>2024-01-01T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -44,28 +44,28 @@
   
   <!-- Static pages -->
   <url>
-    <loc>https://tilecraftpremium.com/about</loc>
+    <loc>https://bluecascadeceramics.com/about</loc>
     <lastmod>2024-01-01T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://tilecraftpremium.com/contact</loc>
+    <loc>https://bluecascadeceramics.com/contact</loc>
     <lastmod>2024-01-01T00:00:00+00:00</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://tilecraftpremium.com/privacy-policy</loc>
+    <loc>https://bluecascadeceramics.com/privacy-policy</loc>
     <lastmod>2024-01-01T00:00:00+00:00</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   
   <url>
-    <loc>https://tilecraftpremium.com/terms-of-service</loc>
+    <loc>https://bluecascadeceramics.com/terms-of-service</loc>
     <lastmod>2024-01-01T00:00:00+00:00</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
