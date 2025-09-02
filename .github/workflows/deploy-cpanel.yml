@@ -1,9 +1,13 @@
-name: Deploy to cPanel
+name: Deploy to cPanel via FTP (DISABLED - using cPanel Git integration)
+
+# Disabled: cPanel handles deployment automatically via .cpanel.yml
+# on:
+#   push:
+#     branches:
+#       - main
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:  # Manual trigger only if needed
 
 permissions:
   contents: read
