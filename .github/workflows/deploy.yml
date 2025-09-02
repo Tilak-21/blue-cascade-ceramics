@@ -60,5 +60,5 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: bluecasc
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./build-files/
+          local-dir: ./build/
           server-dir: /public_html/
