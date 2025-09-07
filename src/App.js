@@ -39,7 +39,17 @@ function App() {
 
   const surfaces = useMemo(() => getUniqueValues(tileInventoryData, 'surface'), []);
   const applications = useMemo(() => getUniqueValues(tileInventoryData, 'application'), []);
-  const peiRatings = useMemo(() => getUniqueValues(tileInventoryData, 'peiRating'), []);
+  const peiRatings = useMemo(() => {
+    const ratings = getUniqueValues(tileInventoryData, 'peiRating');
+    // Sort PEI ratings in proper order (Class 1, Class 2, Class 3, etc.)
+    return ratings.sort((a, b) => {
+      const getClassNumber = (rating) => {
+        const match = rating.match(/Class (\d+)/);
+        return match ? parseInt(match[1]) : 0;
+      };
+      return getClassNumber(a) - getClassNumber(b);
+    });
+  }, []);
 
   const filteredData = useMemo(() => {
     return tileInventoryData.filter(item => {
