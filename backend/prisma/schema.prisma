@@ -1,0 +1,68 @@
+// Modern Prisma Schema for Tile Management
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Tile {
+  id            String   @id @default(cuid())
+  
+  // Basic Information
+  type          String   // 'GP', 'CERAMICS'
+  size          String   
+  series        String
+  material      String
+  surface       String
+  
+  // Inventory & Pricing
+  qty           Int
+  proposedSP    Float
+  
+  // Categorization
+  category      String
+  application   String   // JSON array stored as string
+  peiRating     String
+  thickness     String
+  finish        String
+  
+  // Media
+  image         String?
+  images        String?  // JSON array for multiple images
+  
+  // Metadata
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+  isActive      Boolean  @default(true)
+  
+  // SEO & Search
+  searchTerms   String?  // Additional search keywords
+  description   String?  // Detailed product description
+  
+  @@map("tiles")
+}
+
+model Admin {
+  id        String   @id @default(cuid())
+  username  String   @unique
+  password  String   // Hashed password
+  createdAt DateTime @default(now())
+  lastLogin DateTime?
+  
+  @@map("admins")
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  action    String   // 'CREATE', 'UPDATE', 'DELETE'
+  entity    String   // 'TILE'
+  entityId  String
+  adminId   String?
+  changes   String?  // JSON of what changed
+  timestamp DateTime @default(now())
+  
+  @@map("audit_logs")
+}

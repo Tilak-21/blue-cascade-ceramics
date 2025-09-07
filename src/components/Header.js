@@ -1,8 +1,8 @@
 import React from 'react';
-import { MapPin, Phone } from 'lucide-react';
+import { MapPin, Phone, Shield } from 'lucide-react';
 import { APP_CONFIG, CONTACT_INFO } from '../utils/constants';
 
-const Header = () => {
+const Header = ({ onAdminClick, isAdminLoggedIn }) => {
   return (
     <header className="bg-white shadow-cascade border-b border-pacific-200 sticky top-0 z-50" role="banner">
       <nav id="main-navigation" role="navigation" aria-label="Main navigation">
@@ -15,14 +15,27 @@ const Header = () => {
             <span className="font-medium">PNW</span>
           </div>
 
-          {/* Right - Larger Phone */}
-          <a 
-            href={`tel:${CONTACT_INFO.phone}`}
-            className="flex items-center text-sm bg-cascade-500 text-white px-4 py-2 rounded-lg hover:bg-cascade-600 transition-colors shadow-sm hover:shadow-md group"
-          >
-            <Phone className="w-4 h-4 mr-2 flex-shrink-0 group-hover:animate-pulse" />
-            <span className="font-semibold">Call</span>
-          </a>
+          {/* Right - Phone & Admin */}
+          <div className="flex items-center gap-2">
+            <button
+              onClick={onAdminClick}
+              className={`flex items-center text-xs px-3 py-2 rounded-lg transition-colors ${
+                isAdminLoggedIn 
+                  ? 'bg-green-500 text-white hover:bg-green-600' 
+                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+              }`}
+              title="Admin Panel"
+            >
+              <Shield className="w-3 h-3" />
+            </button>
+            <a 
+              href={`tel:${CONTACT_INFO.phone}`}
+              className="flex items-center text-sm bg-cascade-500 text-white px-4 py-2 rounded-lg hover:bg-cascade-600 transition-colors shadow-sm hover:shadow-md group"
+            >
+              <Phone className="w-4 h-4 mr-2 flex-shrink-0 group-hover:animate-pulse" />
+              <span className="font-semibold">Call</span>
+            </a>
+          </div>
         </div>
         
         {/* Large Edge-to-Edge Logo */}
@@ -63,8 +76,26 @@ const Header = () => {
               </div>
             </div>
 
-            {/* Right - Phone */}
-            <div className="flex-1 flex justify-end items-center min-w-0">
+            {/* Right - Admin & Phone */}
+            <div className="flex-1 flex justify-end items-center min-w-0 gap-3">
+              <button
+                onClick={onAdminClick}
+                className={`flex items-center text-sm px-4 py-3 rounded-lg transition-colors duration-200 shadow-sm hover:shadow-md ${
+                  isAdminLoggedIn 
+                    ? 'bg-green-500 text-white hover:bg-green-600' 
+                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                }`}
+                title={isAdminLoggedIn ? "Admin Dashboard" : "Admin Login"}
+              >
+                <Shield className="w-5 h-5 mr-2 flex-shrink-0" />
+                <div className="min-w-0">
+                  <span className="font-semibold">{isAdminLoggedIn ? 'Dashboard' : 'Admin'}</span>
+                  <div className="text-xs opacity-75">
+                    {isAdminLoggedIn ? 'Manage' : 'Login'}
+                  </div>
+                </div>
+              </button>
+              
               <a 
                 href={`tel:${CONTACT_INFO.phone}`}
                 className="flex items-center text-sm bg-cascade-500 text-white px-4 py-3 rounded-lg hover:bg-cascade-600 transition-colors duration-200 shadow-sm hover:shadow-md group"

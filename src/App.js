@@ -8,6 +8,8 @@ import TileCard from './components/TileCard';
 import TileListItem from './components/TileListItem';
 import Footer from './components/Footer';
 import ImageModal from './components/ImageModal';
+import AdminLogin from './components/AdminLogin';
+import AdminDashboard from './components/AdminDashboard';
 
 import { tileInventoryData, getUniqueValues } from './data/tileData';
 import { calculateTotalInventory } from './utils/helpers';
@@ -28,6 +30,12 @@ function App() {
     currentTile: null,
     currentIndex: 0
   });
+
+  // Admin states
+  const [isAdminLoggedIn, setIsAdminLoggedIn] = useState(() => {
+    return localStorage.getItem('adminToken') !== null;
+  });
+  const [showAdminLogin, setShowAdminLogin] = useState(false);
 
   const surfaces = useMemo(() => getUniqueValues(tileInventoryData, 'surface'), []);
   const applications = useMemo(() => getUniqueValues(tileInventoryData, 'application'), []);
@@ -69,6 +77,27 @@ function App() {
     setSelectedApplication(FILTER_DEFAULTS.ALL);
     setSelectedPEI(FILTER_DEFAULTS.ALL);
     setSelectedCategory(FILTER_DEFAULTS.ALL);
+  };
+
+  // Admin handlers
+  const handleAdminLogin = (data) => {
+    setIsAdminLoggedIn(true);
+    setShowAdminLogin(false);
+  };
+
+  const handleAdminLogout = () => {
+    localStorage.removeItem('adminToken');
+    localStorage.removeItem('adminUser');
+    setIsAdminLoggedIn(false);
+  };
+
+  const handleAdminClick = () => {
+    if (isAdminLoggedIn) {
+      // If already logged in, we'll show the dashboard (handled in render)
+      return;
+    } else {
+      setShowAdminLogin(true);
+    }
   };
 
   // Image modal handlers
@@ -118,10 +147,22 @@ function App() {
     }
   };
 
+  // If admin is logged in, show admin dashboard
+  if (isAdminLoggedIn) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <AdminDashboard onLogout={handleAdminLogout} />
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-pacific-50">
       <SkipLinks />
-      <Header />
+      <Header 
+        onAdminClick={handleAdminClick}
+        isAdminLoggedIn={isAdminLoggedIn}
+      />
 
       <main id="main-content" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <SearchFilters
@@ -234,6 +275,14 @@ function App() {
         hasPrevious={imageModal.currentIndex > 0}
         hasNext={imageModal.currentIndex < filteredData.length - 1}
       />
+
+      {/* Admin Login Modal */}
+      {showAdminLogin && (
+        <AdminLogin 
+          onLogin={handleAdminLogin}
+          onClose={() => setShowAdminLogin(false)}
+        />
+      )}
     </div>
   );
 }
