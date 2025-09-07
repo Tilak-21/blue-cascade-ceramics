@@ -12,6 +12,7 @@ import ImageModal from './components/ImageModal';
 import { tileInventoryData, getUniqueValues } from './data/tileData';
 import { calculateTotalInventory } from './utils/helpers';
 import { VIEW_MODES, FILTER_DEFAULTS } from './utils/constants';
+import { mapSurfaceFinish, mapApplications, mapCategory } from './utils/filterMapping';
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -19,6 +20,7 @@ function App() {
   const [selectedSurface, setSelectedSurface] = useState(FILTER_DEFAULTS.ALL);
   const [selectedApplication, setSelectedApplication] = useState(FILTER_DEFAULTS.ALL);
   const [selectedPEI, setSelectedPEI] = useState(FILTER_DEFAULTS.ALL);
+  const [selectedCategory, setSelectedCategory] = useState(FILTER_DEFAULTS.ALL);
   const [viewMode, setViewMode] = useState(VIEW_MODES.GRID);
   const [showFilters, setShowFilters] = useState(false);
   const [imageModal, setImageModal] = useState({
@@ -40,14 +42,25 @@ function App() {
         item.category.toLowerCase().includes(searchTerm.toLowerCase());
       
       const matchesType = selectedType === FILTER_DEFAULTS.ALL || item.type === selectedType;
-      const matchesSurface = selectedSurface === FILTER_DEFAULTS.ALL || item.surface === selectedSurface;
+      
+      // Map surface finish for comparison
+      const refinedSurface = mapSurfaceFinish(item.surface);
+      const matchesSurface = selectedSurface === FILTER_DEFAULTS.ALL || refinedSurface === selectedSurface;
+      
+      // Map applications for comparison
+      const refinedApplications = mapApplications(item.application);
       const matchesApplication = selectedApplication === FILTER_DEFAULTS.ALL || 
-        item.application.includes(selectedApplication);
+        refinedApplications.includes(selectedApplication);
+      
       const matchesPEI = selectedPEI === FILTER_DEFAULTS.ALL || item.peiRating === selectedPEI;
       
-      return matchesSearch && matchesType && matchesSurface && matchesApplication && matchesPEI;
+      // Map category for comparison
+      const refinedCategory = mapCategory(item.category);
+      const matchesCategory = selectedCategory === FILTER_DEFAULTS.ALL || refinedCategory === selectedCategory;
+      
+      return matchesSearch && matchesType && matchesSurface && matchesApplication && matchesPEI && matchesCategory;
     });
-  }, [searchTerm, selectedType, selectedSurface, selectedApplication, selectedPEI]);
+  }, [searchTerm, selectedType, selectedSurface, selectedApplication, selectedPEI, selectedCategory]);
 
   const resetFilters = () => {
     setSearchTerm('');
@@ -55,6 +68,7 @@ function App() {
     setSelectedSurface(FILTER_DEFAULTS.ALL);
     setSelectedApplication(FILTER_DEFAULTS.ALL);
     setSelectedPEI(FILTER_DEFAULTS.ALL);
+    setSelectedCategory(FILTER_DEFAULTS.ALL);
   };
 
   // Image modal handlers
@@ -121,6 +135,8 @@ function App() {
           setSelectedApplication={setSelectedApplication}
           selectedPEI={selectedPEI}
           setSelectedPEI={setSelectedPEI}
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
           surfaces={surfaces}
           applications={applications}
           peiRatings={peiRatings}
