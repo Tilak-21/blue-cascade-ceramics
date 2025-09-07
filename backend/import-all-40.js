@@ -1,0 +1,103 @@
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
+
+const allTiles = [
+  { type: 'GP', size: 'SL60X120TH9', series: 'CALACATTA GOLD', material: 'B12GCTAG-WHE.M0X5R', surface: 'Matt', qty: 19763, proposedSP: 20, category: 'Natural Stone Look', application: ['Floor', 'Wall', 'Commercial'], peiRating: 'Class 4', thickness: '9mm', finish: 'Unglazed Matt', image: '/images/calacatta_gold.png' },
+  { type: 'GP', size: 'SL60X120TH9', series: 'STARK STONE', material: 'B12GSRKS-OWH.M0X5R', surface: 'Matt', qty: 10308, proposedSP: 20, category: 'Natural Stone Look', application: ['Floor', 'Wall', 'Commercial'], peiRating: 'Class 4', thickness: '9mm', finish: 'Unglazed Matt', image: '/images/stark_stone.png' },
+  { type: 'GP', size: 'SL60X120TH9', series: 'TECH MARBLE', material: 'A12GTCMB-BTV.X0X5P', surface: 'Unglazed Polished', qty: 8302, proposedSP: 40, category: 'Engineered Stone', application: ['Floor', 'Wall', 'Luxury Residential'], peiRating: 'Class 5', thickness: '9mm', finish: 'Unglazed Polished', image: '/images/tech_marble_A12GTCMB-BTV.X0X5P.png' },
+  { type: 'GP', size: 'SL60X120TH9', series: 'TECH MARBLE', material: 'A12GTCMB-SRT.X0X5P', surface: 'Unglazed Polished', qty: 8931, proposedSP: 40, category: 'Engineered Stone', application: ['Floor', 'Wall', 'Luxury Residential'], peiRating: 'Class 5', thickness: '9mm', finish: 'Unglazed Polished', image: '/images/tech_marble_A12GTCMB-SRT.X0X5P.png' },
+  { type: 'GP', size: 'SL60X120TH9', series: 'PIETRA PIASENTINA', material: 'A12GPTPS-BEE.A6X5R', surface: 'Matt', qty: 7613, proposedSP: 25, category: 'Natural Stone Look', application: ['Floor', 'Wall', 'Commercial'], peiRating: 'Class 4', thickness: '9mm', finish: 'Unglazed Matt', image: '/images/pietra_piasentina.png' },
+  { type: 'GP', size: 'SL60X120TH9', series: 'PIETRA PIASENTINA', material: 'A12GPTPS-GRY.A6X5R', surface: 'Matt', qty: 7930, proposedSP: 25, category: 'Natural Stone Look', application: ['Floor', 'Wall', 'Commercial'], peiRating: 'Class 4', thickness: '9mm', finish: 'Unglazed Matt', image: '/images/pietra_piasentina_7930m2.png' },
+  { type: 'GP', size: 'GP60X60', series: 'SEAL MARBLE', material: 'A06GSELB-BEE.M0X3L', surface: 'Polished Glazed', qty: 130860, proposedSP: 20, category: 'Volume Commercial', application: ['Floor', 'Wall', 'Commercial', 'High Traffic'], peiRating: 'Class 4', thickness: '10mm', finish: 'Polished Glazed', image: '/images/seal_marble.png' },
+  { type: 'GP', size: 'GP60X60', series: 'PIETRA PIASENTINA', material: 'A06GPTPS-BEE.A6X0R', surface: 'Matt', qty: 10974, proposedSP: 20, category: 'Natural Stone Look', application: ['Floor', 'Wall'], peiRating: 'Class 4', thickness: '10mm', finish: 'Unglazed Matt', image: '/images/pietra_piasentina_10974m2.png' },
+  { type: 'GP', size: 'GP60X60', series: 'VENQUARTZ', material: 'AI06GVEQU-WH0.X0P', surface: 'Unglazed Polished', qty: 5436, proposedSP: 20, category: 'Engineered Stone', application: ['Floor', 'Wall', 'Luxury Residential'], peiRating: 'Class 5', thickness: '10mm', finish: 'Unglazed Polished', image: '/images/venquartz.png' },
+  { type: 'GP', size: 'GP30X60', series: 'EARTH STONE', material: 'A09GZESN-IVO.A0X0R', surface: 'Matt', qty: 6156, proposedSP: 20, category: 'Natural Stone Look', application: ['Floor', 'Wall'], peiRating: 'Class 3', thickness: '9mm', finish: 'Unglazed Matt', image: '/images/earth_stone.png' },
+  { type: 'GP', size: 'GP30X60', series: 'SIOX', material: 'A09GZSIO-WHE.M0X0L', surface: 'Matt', qty: 5593, proposedSP: 20, category: 'Natural Stone Look', application: ['Floor', 'Wall'], peiRating: 'Class 3', thickness: '9mm', finish: 'Unglazed Matt', image: '/images/siox.png' },
+  { type: 'GP', size: 'GP30X60', series: 'TRIMICK', material: 'A09GTMCK-MGY.M6X0R', surface: 'Unglazed Matt', qty: 17340, proposedSP: 25, category: 'Industrial Grade', application: ['Floor', 'Commercial', 'High Traffic'], peiRating: 'Class 5', thickness: '10mm', finish: 'Unglazed Matt', image: '/images/trimick.png' },
+  { type: 'GP', size: 'GP30X60', series: 'LOUNGE', material: 'AUB09LOUNGRYDSST3C', surface: 'Unglazed Matt', qty: 29537, proposedSP: 25, category: 'Industrial Grade', application: ['Floor', 'Commercial', 'High Traffic'], peiRating: 'Class 5', thickness: '10mm', finish: 'Unglazed Matt', image: '/images/lounge.png' },
+  { type: 'GP', size: 'GP40X40', series: 'GOLDQUADRA', material: 'A07GGLDQ-GLD.M0R', surface: 'Matt', qty: 8803, proposedSP: 30, category: 'Luxury Collection', application: ['Floor', 'Wall', 'Feature'], peiRating: 'Class 4', thickness: '8mm', finish: 'Glazed Matt', image: '/images/goldquadra.png' },
+  { type: 'GP', size: 'GP80X80', series: 'OPIFICIO', material: 'A05GOPFC-ANT.M6X0R', surface: 'Matt', qty: 5832, proposedSP: 25, category: 'Large Format', application: ['Floor', 'Wall', 'Commercial'], peiRating: 'Class 4', thickness: '10mm', finish: 'Unglazed Matt', image: '/images/opificio.png' },
+  { type: 'GP', size: 'GP80X80', series: 'TECH MARBLE', material: 'A05GTCMB-PSB.O0X0P', surface: 'Unglazed Polished', qty: 5311, proposedSP: 40, category: 'Engineered Stone', application: ['Floor', 'Wall', 'Luxury Residential'], peiRating: 'Class 5', thickness: '10mm', finish: 'Unglazed Polished', image: '/images/tech_marble_A12GTCMB-WST.O0X5P.png' },
+  { type: 'GP', size: 'SL90X180TH9', series: 'OPIFICIO', material: 'A93GOPFC-BEE.A6X5R', surface: 'Matt', qty: 5082, proposedSP: 40, category: 'Large Format', application: ['Wall', 'Feature', 'Commercial'], peiRating: 'Class 4', thickness: '9mm', finish: 'Unglazed Matt', image: '/images/opificio_A93GOPFC-BEE.A6X5R.png' },
+  { type: 'GP', size: 'SL120X120TH9', series: 'NEW TRAVERTINO', material: 'AI22GZNTV-GY.G0C3P', surface: 'Polished Glazed', qty: 5868, proposedSP: 40, category: 'Natural Stone Look', application: ['Floor', 'Wall', 'Luxury Residential'], peiRating: 'Class 4', thickness: '9mm', finish: 'Polished Glazed', image: '/images/new_travertino.png' },
+  { type: 'GP', size: 'SL120X19.5TH9CUT', series: 'SEA WOOD', material: 'A99GSEAW#NUR.A6X5R', surface: 'Matt', qty: 6065, proposedSP: 25, category: 'Wood Look', application: ['Floor', 'Wall'], peiRating: 'Class 3', thickness: '9mm', finish: 'Unglazed Matt', image: '/images/sea_wood.png' },
+  { type: 'CERAMICS', size: '20X60RB', series: 'PURSUIT', material: 'A26RPUST-LBR.M0X0R', surface: 'Matt', qty: 23085, proposedSP: 12, category: 'Volume Residential', application: ['Wall', 'Floor', 'Residential'], peiRating: 'Class 3', thickness: '8mm', finish: 'Glazed Matt', image: '/images/pursuit.png' },
+  { type: 'CERAMICS', size: '20X60RB', series: 'DARTHA', material: 'A26RDART-IV0.MDU', surface: 'Décor Matt', qty: 7212, proposedSP: 12, category: 'Decorative Collection', application: ['Wall', 'Feature'], peiRating: 'Class 2', thickness: '8mm', finish: 'Glazed Décor Matt', image: '/images/dartha.png' },
+  { type: 'CERAMICS', size: '20X60RB', series: 'SENALE', material: 'A26RZENA-LBE.GDU', surface: 'Glossy Décor', qty: 5049, proposedSP: 12, category: 'Decorative Wall', application: ['Wall', 'Backsplash'], peiRating: 'Class 1', thickness: '8mm', finish: 'Glazed Glossy', image: '/images/senale.png' },
+  { type: 'CERAMICS', size: '20X60RB', series: 'INTENSITY', material: 'A26RZINT-BR0.GBU', surface: 'Glossy Beveled', qty: 6377, proposedSP: 12, category: 'Designer Wall', application: ['Wall', 'Feature'], peiRating: 'Class 2', thickness: '8mm', finish: 'Glazed Glossy', image: '/images/intensity.png' },
+  { type: 'CERAMICS', size: '30X60RB', series: 'VIGA BRICK', material: 'A14RZVGB-BLK.GKX0R', surface: 'Glossy', qty: 9143, proposedSP: 12, category: 'Brick Look', application: ['Wall', 'Feature'], peiRating: 'Class 2', thickness: '8mm', finish: 'Glazed Glossy', image: '/images/viga_brick.png' },
+  { type: 'CERAMICS', size: '33X33RB', series: 'EMERY', material: 'A04REMRY-BLE.MDX0U', surface: 'Matt Décor', qty: 6755, proposedSP: 10, category: 'Traditional Format', application: ['Floor', 'Wall'], peiRating: 'Class 3', thickness: '8mm', finish: 'Glazed Matt Décor', image: '/images/emery.png' },
+  { type: 'CERAMICS', size: '37.5X75RB', series: 'INWOOD', material: 'A77RINWD-LIG.M0X0R', surface: 'Matt', qty: 6657, proposedSP: 12, category: 'Wood Look', application: ['Floor', 'Wall'], peiRating: 'Class 3', thickness: '8mm', finish: 'Glazed Matt', image: '/images/inwood.png' },
+  { type: 'CERAMICS', size: '40X120RB', series: 'DRAIDE PRO MARBLE', material: 'A45RDRPM-WHE.M0X0R', surface: 'Matt', qty: 8110, proposedSP: 15, category: 'Large Format Ceramic', application: ['Wall', 'Floor'], peiRating: 'Class 3', thickness: '9mm', finish: 'Glazed Matt', image: '/images/draide_pro_marble.png' },
+  { type: 'CERAMICS', size: '40X120RB', series: 'BRAID', material: 'ARD45ZBRASABZMLE1R', surface: 'Matt - Punch', qty: 5109, proposedSP: 15, category: 'Large Format Ceramic', application: ['Wall', 'Floor'], peiRating: 'Class 3', thickness: '9mm', finish: 'Glazed Matt', image: '/images/braid.png' },
+  { type: 'CERAMICS', size: '15X70RB', series: 'MISTREY', material: 'ARB74MSTYBRNZMSNLU', surface: 'Matt', qty: 6377, proposedSP: 12, category: 'Wood Look', application: ['Floor', 'Wall'], peiRating: 'Class 3', thickness: '8mm', finish: 'Glazed Matt', image: '/images/mistrey.png' },
+  { type: 'CERAMICS', size: '15X70RB', series: 'WAY CONCRETE', material: 'ARB74WCCEBRNZMSNLU', surface: 'Matt', qty: 5100, proposedSP: 12, category: 'Concrete Look', application: ['Floor', 'Wall'], peiRating: 'Class 3', thickness: '8mm', finish: 'Glazed Matt', image: '/images/way_concrete.png' },
+  { type: 'CERAMICS', size: '20X23WB', series: 'COUNTRY BRICK', material: 'A23SZCBR-LIG.M6X0U', surface: 'Matt', qty: 5522, proposedSP: 25, category: 'Brick Look', application: ['Wall', 'Feature', 'Exterior'], peiRating: 'Class 4', thickness: '8mm', finish: 'Glazed Matt', image: '/images/country_brick.png' },
+  { type: 'CERAMICS', size: '25X90RB', series: 'OCEAN WAVE', material: 'ARB43OCWESABZMLNLR', surface: 'Matt', qty: 7272, proposedSP: 12, category: 'Textured Collection', application: ['Wall', 'Feature'], peiRating: 'Class 2', thickness: '8mm', finish: 'Glazed Matt', image: '/images/ocean_wave.png' },
+  { type: 'CERAMICS', size: '25X90RB', series: 'SKIPTON', material: 'ARB43SKTNIVOZMLNLR', surface: 'Matt', qty: 5945, proposedSP: 12, category: 'Textured Collection', application: ['Wall', 'Feature'], peiRating: 'Class 2', thickness: '8mm', finish: 'Glazed Matt', image: '/images/skipton.png' },
+  { type: 'CERAMICS', size: '25X90RB', series: 'RIPPLE', material: 'ARB43ZRPLBUWZMSNLR', surface: 'Matt', qty: 5773, proposedSP: 12, category: 'Textured Collection', application: ['Wall', 'Feature'], peiRating: 'Class 2', thickness: '8mm', finish: 'Glazed Matt', image: '/images/ripple.png' },
+  { type: 'CERAMICS', size: '25X90RB', series: 'NOTREES', material: 'ARD43NTRRBEEZMLN1R', surface: 'Matt - Punch', qty: 5139, proposedSP: 12, category: 'Textured Collection', application: ['Wall', 'Feature'], peiRating: 'Class 2', thickness: '8mm', finish: 'Glazed Matt', image: '/images/notrees.png' },
+  { type: 'CERAMICS', size: '40X80RB', series: 'BIANCO VENA', material: 'A48RZBVA-WH0.HLR', surface: 'Line Décor - Glossy', qty: 5850, proposedSP: 12, category: 'Marble Look', application: ['Wall', 'Feature'], peiRating: 'Class 2', thickness: '8mm', finish: 'Glazed Glossy', image: '/images/bianco_vena.png' },
+  { type: 'CERAMICS', size: '40X80RB', series: 'METROPOL', material: 'A48RZMPL-MGY.MDR', surface: 'Décor - Matt', qty: 5211, proposedSP: 12, category: 'Urban Collection', application: ['Wall', 'Feature'], peiRating: 'Class 2', thickness: '8mm', finish: 'Glazed Matt', image: '/images/metropol.png' },
+  { type: 'CERAMICS', size: '40X80RB', series: 'METROPOL', material: 'A48RZNUM-IV0.HDR', surface: 'Décor Glossy', qty: 5440, proposedSP: 12, category: 'Urban Collection', application: ['Wall', 'Feature'], peiRating: 'Class 2', thickness: '8mm', finish: 'Glazed Glossy', image: '/images/numero.png' },
+  { type: 'CERAMICS', size: '40X80RB', series: 'BASSANO', material: 'ARB48BSNOBUWZMLNLR', surface: 'Matt', qty: 8074, proposedSP: 12, category: 'Natural Stone Look', application: ['Wall', 'Floor'], peiRating: 'Class 3', thickness: '8mm', finish: 'Glazed Matt', image: '/images/bassano.png' },
+  { type: 'CERAMICS', size: '41.6X41.6RBTH13', series: 'BRIME STONE', material: 'A07RBIST-IVO.M0X1U', surface: 'Matt - 13mm', qty: 7513, proposedSP: 15, category: 'Heavy Duty', application: ['Floor', 'Commercial', 'High Traffic'], peiRating: 'Class 4', thickness: '13mm', finish: 'Glazed Matt', image: '/images/brime_stone.png' }
+];
+
+async function importAll40Tiles() {
+  try {
+    console.log('🚀 Starting import of all 40 tiles...');
+    
+    await prisma.auditLog.deleteMany();
+    await prisma.tile.deleteMany();
+    
+    for (const tile of allTiles) {
+      await prisma.tile.create({
+        data: {
+          type: tile.type,
+          size: tile.size,
+          series: tile.series,
+          material: tile.material,
+          surface: tile.surface,
+          qty: tile.qty,
+          proposedSP: tile.proposedSP,
+          category: tile.category,
+          application: JSON.stringify(tile.application),
+          peiRating: tile.peiRating,
+          thickness: tile.thickness,
+          finish: tile.finish,
+          image: tile.image,
+          searchTerms: `${tile.series} ${tile.material} ${tile.category}`.toLowerCase(),
+          description: `${tile.series} - ${tile.category} tile`,
+          isActive: true,
+        },
+      });
+    }
+
+    const totalInventory = allTiles.reduce((sum, tile) => sum + tile.qty, 0);
+    const totalValue = allTiles.reduce((sum, tile) => sum + (tile.qty * tile.proposedSP), 0);
+    
+    console.log(`✅ Imported ${allTiles.length} tiles`);
+    console.log(`📊 Total inventory: ${totalInventory.toLocaleString()} units`);
+    console.log(`💰 Total value: $${totalValue.toLocaleString()}`);
+    
+    await prisma.auditLog.create({
+      data: {
+        action: 'BULK_IMPORT',
+        entity: 'TILE',
+        entityId: 'all-40-tiles',
+        adminId: null,
+        changes: JSON.stringify({ importCount: allTiles.length, totalInventory, totalValue }),
+      },
+    });
+    
+    console.log('🎉 All 40 tiles imported successfully!');
+  } catch (error) {
+    console.error('❌ Import failed:', error);
+  } finally {
+    await prisma.$disconnect();
+  }
+}
+
+importAll40Tiles();
