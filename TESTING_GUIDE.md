@@ -38,7 +38,7 @@ Visit: `http://localhost:3000`
 1. **Click Admin Button** → Should open login modal
 2. **Login Credentials**:
    - Username: `admin`
-   - Password: `CascadeTiles2024!`
+   - Password: `CascadeTiles2024`
 3. **Expected Result**: Login modal closes, page refreshes to admin dashboard
 
 ### 4. Test Admin Dashboard
@@ -97,7 +97,7 @@ After successful login, you should see:
 **Solutions:**
 1. **Verify Credentials**:
    - Username: `admin` (lowercase)
-   - Password: `CascadeTiles2024!` (exact case and characters)
+   - Password: `CascadeTiles2024` (exact case and characters)
 
 2. **Check Backend Logs**:
    - Look at terminal running `npm run dev` in backend
@@ -174,7 +174,7 @@ The admin button is **very small** on mobile devices:
 
 **Admin Credentials:**
 - Username: `admin`
-- Password: `CascadeTiles2024!`
+- Password: `CascadeTiles2024`
 
 **Expected File Structure:**
 ```

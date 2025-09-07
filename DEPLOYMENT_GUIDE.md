@@ -14,7 +14,7 @@ curl http://localhost:5001/api/tiles
 - Open browser: `http://localhost:3000`
 - Look for **Admin** button in the header (next to phone number)
 - Click Admin button → should open login modal
-- Login credentials: `admin / CascadeTiles2024!`
+- Login credentials: `admin / CascadeTiles2024`
 
 ### 3. If Admin Button is Not Visible
 ```bash
@@ -74,7 +74,7 @@ If your cPanel supports Node.js apps:
    DATABASE_URL="file:./production.db"
    JWT_SECRET="your-production-jwt-secret-change-me"
    ADMIN_USERNAME="admin"
-   ADMIN_PASSWORD="CascadeTiles2024!"
+   ADMIN_PASSWORD="CascadeTiles2024"
    PORT=3000
    NODE_ENV="production"
    FRONTEND_URL="https://yourdomain.com"
@@ -199,4 +199,4 @@ If deployment fails:
 
 **Credentials for Testing:**
 - Username: `admin`
-- Password: `CascadeTiles2024!`
+- Password: `CascadeTiles2024`
