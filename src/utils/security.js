@@ -56,7 +56,7 @@ export const initCSP = () => {
     'connect-src': [
       "'self'",
       config.API.BASE_URL,
-      ...(config.isDevelopment() ? ['http://localhost:5001', 'http://localhost:5000', 'http://127.0.0.1:5001'] : []),
+      ...(config.isDevelopment() ? ['http://localhost:5001', 'http://localhost:5000', 'http://127.0.0.1:5001'] : ['https://www.bluecascadeceramics.com']),
       'https://www.google-analytics.com',
       'https://analytics.google.com',
       'https://*.sentry.io'

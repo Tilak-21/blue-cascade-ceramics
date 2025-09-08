@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Eye, EyeOff, Shield, AlertCircle } from 'lucide-react';
+import { API_BASE_URL } from '../config/api';
 
 const AdminLogin = ({ onLogin, onClose }) => {
   const [credentials, setCredentials] = useState({
@@ -16,7 +17,7 @@ const AdminLogin = ({ onLogin, onClose }) => {
     setError('');
 
     try {
-      const response = await fetch('http://localhost:5001/api/auth/login', {
+      const response = await fetch(`${API_BASE_URL}/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

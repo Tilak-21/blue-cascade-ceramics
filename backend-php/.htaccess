@@ -1,0 +1,22 @@
+RewriteEngine On
+
+# Enable CORS for all requests
+Header always set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+Header always set Access-Control-Allow-Headers "Content-Type, Authorization, X-Requested-With"
+
+# Route API requests to appropriate PHP files
+RewriteCond %{REQUEST_METHOD} OPTIONS
+RewriteRule ^(.*)$ $1 [R=200,L]
+
+# Auth routes
+RewriteRule ^api/auth/login/?$ api/auth/login.php [L,QSA]
+
+# Tiles routes  
+RewriteRule ^api/tiles/?$ api/tiles/index.php [L,QSA]
+RewriteRule ^api/tiles/([0-9]+)/?$ api/tiles/index.php?id=$1 [L,QSA]
+
+# Admin routes
+RewriteRule ^api/admin/dashboard/?$ api/admin/dashboard.php [L,QSA]
+
+# Import route (for initial setup only)
+RewriteRule ^import/?$ import/import-all-tiles.php [L,QSA]

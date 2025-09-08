@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Plus, Edit2, Trash2, BarChart3, Package, DollarSign, TrendingUp } from 'lucide-react';
 import TileForm from './TileForm';
+import { API_BASE_URL } from '../config/api';
 
 const AdminDashboard = ({ onLogout }) => {
   const [tiles, setTiles] = useState([]);
@@ -17,7 +18,7 @@ const AdminDashboard = ({ onLogout }) => {
     showInactive: false
   });
 
-  const API_BASE = 'http://localhost:5001/api';
+  const API_BASE = API_BASE_URL;
 
   // Get auth headers
   const getAuthHeaders = () => {

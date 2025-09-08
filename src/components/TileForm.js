@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { X, Save, Plus, Trash2 } from 'lucide-react';
+import { API_BASE_URL } from '../config/api';
 
 const TileForm = ({ tile, onClose, onSuccess }) => {
   const [formData, setFormData] = useState({
@@ -24,7 +25,7 @@ const TileForm = ({ tile, onClose, onSuccess }) => {
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
 
-  const API_BASE = 'http://localhost:5001/api';
+  const API_BASE = API_BASE_URL;
 
   // Get auth headers
   const getAuthHeaders = () => {
