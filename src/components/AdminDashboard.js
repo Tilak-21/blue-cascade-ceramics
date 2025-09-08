@@ -32,12 +32,17 @@ const AdminDashboard = ({ onLogout }) => {
   // Fetch dashboard stats
   const fetchDashboardStats = async () => {
     try {
+      console.log('Fetching dashboard stats from:', `${API_BASE}/dashboard`);
       const response = await fetch(`${API_BASE}/dashboard`, {
         headers: getAuthHeaders()
       });
+      console.log('Dashboard response status:', response.status);
       if (response.ok) {
         const data = await response.json();
+        console.log('Dashboard data received:', data);
         setDashboardStats(data.data);
+      } else {
+        console.error('Dashboard API error:', response.status, await response.text());
       }
     } catch (error) {
       console.error('Failed to fetch dashboard stats:', error);

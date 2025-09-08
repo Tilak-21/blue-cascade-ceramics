@@ -420,16 +420,19 @@ const TileForm = ({ tile, onClose, onSuccess }) => {
               
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Main Image URL
+                  Main Image Path
                 </label>
                 <input
-                  type="url"
+                  type="text"
                   name="image"
                   value={formData.image}
                   onChange={handleChange}
-                  placeholder="https://example.com/image.jpg"
+                  placeholder="/images/tile_name.png"
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cascade-500 focus:border-transparent"
                 />
+                <p className="mt-1 text-xs text-gray-500">
+                  Use file paths like "/images/tile_name.png" or full URLs
+                </p>
               </div>
 
               <div className="mt-4">
@@ -439,10 +442,10 @@ const TileForm = ({ tile, onClose, onSuccess }) => {
                 {formData.images.map((image, index) => (
                   <div key={index} className="flex items-center gap-2 mb-2">
                     <input
-                      type="url"
+                      type="text"
                       value={image}
                       onChange={(e) => handleImageChange(index, e.target.value)}
-                      placeholder="https://example.com/image.jpg"
+                      placeholder="/images/tile_name_variant.png"
                       className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-cascade-500 focus:border-transparent"
                     />
                     <button
