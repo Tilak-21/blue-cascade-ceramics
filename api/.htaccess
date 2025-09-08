@@ -23,6 +23,7 @@ RewriteRule ^(.*)$ $1 [R=200,L]
 # API routes - simple and clean
 RewriteRule ^test/?$ test.php [L,QSA]
 RewriteRule ^debug/?$ debug.php [L,QSA]
+RewriteRule ^dashboard-simple/?$ dashboard-simple.php [L,QSA]
 RewriteRule ^auth/?$ auth.php [L,QSA]
 RewriteRule ^tiles/?$ tiles.php [L,QSA]
 RewriteRule ^tiles/([0-9]+)/?$ tiles.php?id=$1 [L,QSA]
