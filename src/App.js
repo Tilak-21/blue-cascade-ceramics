@@ -11,12 +11,15 @@ import ImageModal from './components/ImageModal';
 import AdminLogin from './components/AdminLogin';
 import AdminDashboard from './components/AdminDashboard';
 
-import { tileInventoryData, getUniqueValues } from './data/tileData';
+import { useTiles, getUniqueValues } from './hooks/useTiles';
 import { calculateTotalInventory } from './utils/helpers';
 import { VIEW_MODES, FILTER_DEFAULTS } from './utils/constants';
 import { mapSurfaceFinish, mapApplications, mapCategory } from './utils/filterMapping';
 
 function App() {
+  // Fetch tiles from API
+  const { tiles, loading: tilesLoading, error: tilesError, refetch } = useTiles();
+  
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedType, setSelectedType] = useState(FILTER_DEFAULTS.ALL);
   const [selectedSurface, setSelectedSurface] = useState(FILTER_DEFAULTS.ALL);
@@ -37,10 +40,10 @@ function App() {
   });
   const [showAdminLogin, setShowAdminLogin] = useState(false);
 
-  const surfaces = useMemo(() => getUniqueValues(tileInventoryData, 'surface'), []);
-  const applications = useMemo(() => getUniqueValues(tileInventoryData, 'application'), []);
+  const surfaces = useMemo(() => getUniqueValues(tiles, 'surface'), [tiles]);
+  const applications = useMemo(() => getUniqueValues(tiles, 'application'), [tiles]);
   const peiRatings = useMemo(() => {
-    const ratings = getUniqueValues(tileInventoryData, 'peiRating');
+    const ratings = getUniqueValues(tiles, 'peiRating');
     // Sort PEI ratings in proper order (Class 1, Class 2, Class 3, etc.)
     return ratings.sort((a, b) => {
       const getClassNumber = (rating) => {
@@ -49,10 +52,10 @@ function App() {
       };
       return getClassNumber(a) - getClassNumber(b);
     });
-  }, []);
+  }, [tiles]);
 
   const filteredData = useMemo(() => {
-    return tileInventoryData.filter(item => {
+    return tiles.filter(item => {
       const matchesSearch = !searchTerm || 
         item.series.toLowerCase().includes(searchTerm.toLowerCase()) ||
         item.material.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -78,7 +81,7 @@ function App() {
       
       return matchesSearch && matchesType && matchesSurface && matchesApplication && matchesPEI && matchesCategory;
     });
-  }, [searchTerm, selectedType, selectedSurface, selectedApplication, selectedPEI, selectedCategory]);
+  }, [tiles, searchTerm, selectedType, selectedSurface, selectedApplication, selectedPEI, selectedCategory]);
 
   const resetFilters = () => {
     setSearchTerm('');
@@ -161,7 +164,22 @@ function App() {
   if (isAdminLoggedIn) {
     return (
       <div className="min-h-screen bg-gray-50">
-        <AdminDashboard onLogout={handleAdminLogout} />
+        <AdminDashboard 
+          onLogout={handleAdminLogout}
+          onDataChange={refetch} // Refresh tiles when admin makes changes
+        />
+      </div>
+    );
+  }
+
+  // Show loading state while fetching tiles
+  if (tilesLoading) {
+    return (
+      <div className="min-h-screen bg-pacific-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cascade-600 mx-auto"></div>
+          <p className="mt-4 text-pacific-600">Loading tiles...</p>
+        </div>
       </div>
     );
   }
