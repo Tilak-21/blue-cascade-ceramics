@@ -432,7 +432,7 @@ export const tileInventoryData = [
     peiRating: 'Class 3',
     thickness: '8mm',
     finish: 'Glazed Matt',
-    image: '/images/mistrey.png'
+    image: '/images/Mistrey.png'
   },
   {
     type: 'CERAMICS',

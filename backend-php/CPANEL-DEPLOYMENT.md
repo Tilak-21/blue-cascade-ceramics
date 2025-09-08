@@ -24,7 +24,7 @@
 
 4. **Test the API**:
    - **Tiles**: `https://www.bluecascadeceramics.com/api/tiles/`
-   - **Login**: `https://www.bluecascadeceramics.com/api/auth/login`
+   - **Login**: `https://www.bluecascadeceramics.com/api/aut h/login`
    - **Dashboard**: `https://www.bluecascadeceramics.com/api/admin/dashboard`
 
 ### 🔧 **What This PHP Backend Provides**:
