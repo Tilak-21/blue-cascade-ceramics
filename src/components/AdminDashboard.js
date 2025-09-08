@@ -32,7 +32,7 @@ const AdminDashboard = ({ onLogout }) => {
   // Fetch dashboard stats
   const fetchDashboardStats = async () => {
     try {
-      const response = await fetch(`${API_BASE}/admin/dashboard`, {
+      const response = await fetch(`${API_BASE}/dashboard`, {
         headers: getAuthHeaders()
       });
       if (response.ok) {

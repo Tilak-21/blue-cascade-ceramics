@@ -17,7 +17,7 @@ const AdminLogin = ({ onLogin, onClose }) => {
     setError('');
 
     try {
-      const response = await fetch(`${API_BASE_URL}/auth/login`, {
+      const response = await fetch(`${API_BASE_URL}/auth`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
