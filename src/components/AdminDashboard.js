@@ -49,12 +49,12 @@ const AdminDashboard = ({ onLogout }) => {
     }
   };
 
-  // Fetch tiles
-  const fetchTiles = async (page = 1, searchFilters = filters) => {
+  // Fetch tiles with infinite scroll support
+  const fetchTiles = async (page = 1, searchFilters = filters, append = false) => {
     try {
       const params = new URLSearchParams({
         page: page.toString(),
-        limit: '20',
+        limit: '50', // Increased limit for better performance
         ...Object.fromEntries(Object.entries(searchFilters).filter(([_, v]) => v))
       });
 
@@ -64,12 +64,25 @@ const AdminDashboard = ({ onLogout }) => {
 
       if (response.ok) {
         const data = await response.json();
-        setTiles(data.data);
-        setTotalPages(data.pagination.totalPages);
+        if (append && page > 1) {
+          // Append new tiles for infinite scroll
+          setTiles(prevTiles => [...prevTiles, ...data.data]);
+        } else {
+          // Replace tiles for new search or first load
+          setTiles(data.data);
+        }
+        setTotalPages(data.pagination.pages);
         setCurrentPage(page);
       }
     } catch (error) {
       console.error('Failed to fetch tiles:', error);
+    }
+  };
+
+  // Load more tiles
+  const loadMoreTiles = async () => {
+    if (currentPage < totalPages) {
+      await fetchTiles(currentPage + 1, filters, true);
     }
   };
 
@@ -351,32 +364,64 @@ const AdminDashboard = ({ onLogout }) => {
             </table>
           </div>
 
-          {/* Pagination */}
-          {totalPages > 1 && (
-            <div className="px-6 py-4 border-t border-gray-200 flex items-center justify-between">
-              <div className="text-sm text-gray-700">
-                Page {currentPage} of {totalPages}
-              </div>
-              <div className="flex space-x-2">
-                <button
-                  onClick={() => fetchTiles(currentPage - 1)}
-                  disabled={currentPage === 1}
-                  className="px-3 py-1 border border-gray-300 rounded-md text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
-                >
-                  Previous
-                </button>
-                <button
-                  onClick={() => fetchTiles(currentPage + 1)}
-                  disabled={currentPage === totalPages}
-                  className="px-3 py-1 border border-gray-300 rounded-md text-sm disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
-                >
-                  Next
-                </button>
-              </div>
+          {/* Load More Button */}
+          {currentPage < totalPages && (
+            <div className="px-6 py-4 border-t border-gray-200 text-center">
+              <button
+                onClick={loadMoreTiles}
+                className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-cascade-600 hover:bg-cascade-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-cascade-500 transition-colors"
+              >
+                <Package className="w-5 h-5 mr-2" />
+                Load More Tiles ({tiles.length} of {totalPages * 50} shown)
+              </button>
+            </div>
+          )}
+
+          {/* Show all loaded message */}
+          {currentPage >= totalPages && tiles.length > 50 && (
+            <div className="px-6 py-4 border-t border-gray-200 text-center">
+              <p className="text-sm text-gray-600">
+                All {tiles.length} tiles loaded
+              </p>
             </div>
           )}
         </div>
       </div>
+
+      {/* Admin Footer */}
+      <footer className="bg-white border-t border-gray-200 mt-12">
+        <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <div className="flex items-center space-x-4 mb-4 md:mb-0">
+              <div className="text-2xl font-bold text-cascade-600">
+                Blue Cascade Ceramics
+              </div>
+              <span className="text-sm text-gray-500 bg-gray-100 px-2 py-1 rounded">
+                Admin Panel
+              </span>
+            </div>
+            
+            <div className="flex flex-col md:flex-row items-center space-y-2 md:space-y-0 md:space-x-6 text-sm text-gray-600">
+              <div className="flex items-center">
+                <Package className="w-4 h-4 mr-1" />
+                {dashboardStats.stats?.totalTiles || 0} Total Tiles
+              </div>
+              <div className="flex items-center">
+                <BarChart3 className="w-4 h-4 mr-1" />
+                {dashboardStats.stats?.totalInventory?.toLocaleString() || 0} Units
+              </div>
+              <div className="flex items-center">
+                <DollarSign className="w-4 h-4 mr-1" />
+                ${dashboardStats.stats?.totalValue?.toLocaleString() || 0}
+              </div>
+            </div>
+            
+            <div className="text-sm text-gray-500 mt-4 md:mt-0">
+              © 2024 Blue Cascade Ceramics. Admin Dashboard.
+            </div>
+          </div>
+        </div>
+      </footer>
 
       {/* Tile Form Modal */}
       {showTileForm && (
