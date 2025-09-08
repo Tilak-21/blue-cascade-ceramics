@@ -174,7 +174,7 @@ const AdminDashboard = ({ onLogout }) => {
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">Total Tiles</p>
                 <p className="text-2xl font-bold text-gray-900">
-                  {dashboardStats.overview?.totalTiles || 0}
+                  {dashboardStats.stats?.totalTiles || 0}
                 </p>
               </div>
             </div>
@@ -188,7 +188,7 @@ const AdminDashboard = ({ onLogout }) => {
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">Active Tiles</p>
                 <p className="text-2xl font-bold text-gray-900">
-                  {dashboardStats.overview?.activeTiles || 0}
+                  {dashboardStats.stats?.activeTiles || 0}
                 </p>
               </div>
             </div>
@@ -202,7 +202,7 @@ const AdminDashboard = ({ onLogout }) => {
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">Total Inventory</p>
                 <p className="text-2xl font-bold text-gray-900">
-                  {dashboardStats.inventory?.totalQuantity?.toLocaleString() || 0}
+                  {dashboardStats.stats?.totalInventory?.toLocaleString() || 0}
                 </p>
               </div>
             </div>
@@ -216,7 +216,7 @@ const AdminDashboard = ({ onLogout }) => {
               <div className="ml-4">
                 <p className="text-sm font-medium text-gray-600">Inventory Value</p>
                 <p className="text-2xl font-bold text-gray-900">
-                  ${dashboardStats.overview?.totalInventoryValue?.toLocaleString() || 0}
+                  ${dashboardStats.stats?.totalValue?.toLocaleString() || 0}
                 </p>
               </div>
             </div>
